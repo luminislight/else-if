@@ -6,7 +6,7 @@ unzip /tmp/v/v2.zip -d /tmp/v
 install -m 755 /tmp/v/v2ray /usr/local/bin/v2ray
 install -m 755 /tmp/v/v2ctl /usr/local/bin/v2ctl
 
-rm -rf /tmp/v2
+rm -rf /tmp/v
 
 install -d /usr/local/etc/v2ray
 cat << EOF > /usr/local/etc/v2ray/config.json
@@ -19,10 +19,10 @@ cat << EOF > /usr/local/etc/v2ray/config.json
                 "clients": [
                     {
                         "id": "$UUID",
-                        "alterId": 64
+                        "alterId": 0
                     }
                 ],
-                "disableInsecureEncryption": true
+                "decryption": "none"
             },
             "streamSettings": {
                 "network": "ws"
@@ -31,7 +31,14 @@ cat << EOF > /usr/local/etc/v2ray/config.json
     ],
     "outbounds": [
         {
-            "protocol": "freedom"
+          "protocol": "freedom", 
+          "settings": { }, 
+          "tag": "direct"
+        }, 
+        {
+          "protocol": "blackhole", 
+          "settings": { }, 
+          "tag": "blocked"
         }
     ]
 }
