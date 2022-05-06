@@ -19,13 +19,15 @@ cat << EOF > /usr/local/etc/v2ray/config.json
                 "clients": [
                     {
                         "id": "$UUID",
-                        "alterId": 0
+                        "flow": "xtls-rprx-direct",
+                        "level": 0
                     }
                 ],
                 "decryption": "none"
             },
             "streamSettings": {
-                "network": "ws"
+                "network": "tcp",
+                "security": "xtls"
             }
         }
     ],
